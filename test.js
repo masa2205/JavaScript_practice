@@ -1,22 +1,46 @@
-function greet(id1,id2,id3) {
-    console.log(arguments)
-    let slicedArray = [].slice.call(arguments);
-    let hi = `Hi,${this.name}`
-    console.log(slicedArray);
+const timesTwo = i => i * 2;
+
+
+ const res = timesTwo(2);
+ console.log(res);
+
+//  書き方(シンタックス)について
+
+let arrowFn;
+arrowFn = () => 42;
+arrowFn = x => 42;
+arrowFn = (x) => 42;
+arrowFn = (x,y) => 42;
+arrowFn = (x,y) => {
+    console.log(x+y);
+    return x + y;
 }
 
-let obj = {name: "Tom"};
+// thisのバインドについて
 
-const arry = [1,2,3,4];
-console.log(Math.min.apply(null,arry))
 
-let myObj = {
-    id: 42,
-    print() {
+let normalFn;
+normalFn = {
+    id: 43,
+    counter: function() {
+        console.log(this);
 
-        setTimeout( () => {
-            console.log(this.id);
-        }, 1000);
+        window.setTimeout(() => {
+            console.log(this);
+        },1000);
+    }
+};
+normalFn.counter()
+
+window.me = 'global'
+const outer = function(){
+    let me = 'outer'; //lexicalscope
+
+    return {
+        me: 'inner',
+        say: () => {
+            console.log(this.me);
+        }
     }
 }
-myObj.print()
+outer().say();
