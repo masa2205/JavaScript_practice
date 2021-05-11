@@ -15,6 +15,7 @@ increment(); //1
 increment(); //2
 increment(); //3
 
+
 function addStringFactory(tail) {
     function contact(str) {
         return str + tail;
