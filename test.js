@@ -1,46 +1,26 @@
-const timesTwo = i => i * 2;
+// クロージャーの定義
 
+// クロージャーは、関数と、その関数が宣言されたレキシカルスコープの組み合わせです。
+let increment = (function (){
 
- const res = timesTwo(2);
- console.log(res);
+    let counter = 0; //Lexical Scope
 
-//  書き方(シンタックス)について
+    return function () {
+        counter += 1;
+        console.log(counter)
+    }
+})();
 
-let arrowFn;
-arrowFn = () => 42;
-arrowFn = x => 42;
-arrowFn = (x) => 42;
-arrowFn = (x,y) => 42;
-arrowFn = (x,y) => {
-    console.log(x+y);
-    return x + y;
+increment(); //1
+increment(); //2
+increment(); //3
+
+function addStringFactory(tail) {
+    function contact(str) {
+        return str + tail;
+    }
+    return contact;
 }
 
-// thisのバインドについて
-
-
-let normalFn;
-normalFn = {
-    id: 43,
-    counter: function() {
-        console.log(this);
-
-        window.setTimeout(() => {
-            console.log(this);
-        },1000);
-    }
-};
-normalFn.counter()
-
-window.me = 'global'
-const outer = function(){
-    let me = 'outer'; //lexicalscope
-
-    return {
-        me: 'inner',
-        say: () => {
-            console.log(this.me);
-        }
-    }
-}
-outer().say();
+let addAs = addStringFactory('AAAAAA');
+let addBs = addStringFactory('BBBBBB');
